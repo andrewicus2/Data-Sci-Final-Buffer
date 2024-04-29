@@ -57,8 +57,7 @@ dot_data = export_graphviz(clf, out_file=None,
 
                          special_characters=True)
 
-graph = graphviz.Source(dot_data)
-st.graphviz_chart(graph)
+st_graphviz_chart(dot_data)
 
 
 knn = KNeighborsClassifier()
