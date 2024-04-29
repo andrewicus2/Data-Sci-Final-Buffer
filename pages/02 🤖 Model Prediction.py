@@ -46,6 +46,7 @@ tree_results = clf.predict(X_test)
 import graphviz
 from sklearn.tree import export_graphviz
 feature_names = X.columns
+feature_cols = X.columns
 dot_data = export_graphviz(clf, out_file=None,
 
                          feature_names=feature_cols,
