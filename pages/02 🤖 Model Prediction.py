@@ -27,47 +27,51 @@ df = df.drop(["ID"], axis = 1)
 
 params = st.multiselect("Select Parameters", df.columns, default = ["Year_Birth"])
 
-X = df.drop(labels = ['Response'], axis = 1)
-X = df[params]
-y = df["Response"]
-X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.3, random_state = 42)
+if(params):
+    st.write("Please Select Params")
+else:
 
-# tracker = EmissionsTracker()
-# tracker.start()
+    X = df.drop(labels = ['Response'], axis = 1)
+    X = df[params]
+    y = df["Response"]
+    X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.3, random_state = 42)
 
-logmodel = LogisticRegression()
-logmodel.fit(X_train,y_train)
-log_results = logmodel.predict(X_test)
+    # tracker = EmissionsTracker()
+    # tracker.start()
 
-clf = DecisionTreeClassifier(max_depth=3)
-clf = clf.fit(X_train,y_train)
-tree_results = clf.predict(X_test)
+    logmodel = LogisticRegression()
+    logmodel.fit(X_train,y_train)
+    log_results = logmodel.predict(X_test)
 
-import graphviz
-from sklearn.tree import export_graphviz
+    clf = DecisionTreeClassifier(max_depth=3)
+    clf = clf.fit(X_train,y_train)
+    tree_results = clf.predict(X_test)
 
-# Assuming `clf` and `X` are defined somewhere in your code
+    import graphviz
+    from sklearn.tree import export_graphviz
 
-# Your code for exporting the decision tree graph
-feature_names = X.columns
-feature_cols = X.columns
-dot_data = export_graphviz(clf, out_file=None,
-                           feature_names=feature_cols,
-                           class_names=['0', '1'],
-                           filled=True, rounded=True,
-                           special_characters=True)
+    # Assuming `clf` and `X` are defined somewhere in your code
 
-# Display the graph using streamlit_graphviz
-st.graphviz_chart(dot_data)
+    # Your code for exporting the decision tree graph
+    feature_names = X.columns
+    feature_cols = X.columns
+    dot_data = export_graphviz(clf, out_file=None,
+                            feature_names=feature_cols,
+                            class_names=['0', '1'],
+                            filled=True, rounded=True,
+                            special_characters=True)
+
+    # Display the graph using streamlit_graphviz
+    st.graphviz_chart(dot_data)
 
 
-knn = KNeighborsClassifier()
-knn.fit(X_train, y_train)
-knn_results = knn.predict(X_test)
+    knn = KNeighborsClassifier()
+    knn.fit(X_train, y_train)
+    knn_results = knn.predict(X_test)
 
-# emissions = tracker.stop()
-# print(f"Estimated emissions for training the model: {emissions:.4f} kg of CO2")
+    # emissions = tracker.stop()
+    # print(f"Estimated emissions for training the model: {emissions:.4f} kg of CO2")
 
-st.metric(label = "Log Accuracy", value = str(round(metrics.accuracy_score(y_test, log_results)*100, 2)) + "%")
-st.metric(label = "Tree Accuracy", value = str(round(metrics.accuracy_score(y_test, tree_results)*100, 2)) + "%")
-st.metric(label = "kNN Accuracy", value = str(round(metrics.accuracy_score(y_test, knn_results)*100, 2)) + "%")
+    st.metric(label = "Log Accuracy", value = str(round(metrics.accuracy_score(y_test, log_results)*100, 2)) + "%")
+    st.metric(label = "Tree Accuracy", value = str(round(metrics.accuracy_score(y_test, tree_results)*100, 2)) + "%")
+    st.metric(label = "kNN Accuracy", value = str(round(metrics.accuracy_score(y_test, knn_results)*100, 2)) + "%")
