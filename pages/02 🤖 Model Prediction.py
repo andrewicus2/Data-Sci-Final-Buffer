@@ -58,7 +58,8 @@ dot_data = export_graphviz(clf, out_file=None,
                          special_characters=True)
 
 graph = graphviz.Source(dot_data)
-graph
+st.graphviz_chart(graph)
+
 
 knn = KNeighborsClassifier()
 knn.fit(X_train, y_train)
