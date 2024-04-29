@@ -45,18 +45,20 @@ tree_results = clf.predict(X_test)
 
 import graphviz
 from sklearn.tree import export_graphviz
+from streamlit_graphviz import st_graphviz_chart
+
+# Assuming `clf` and `X` are defined somewhere in your code
+
+# Your code for exporting the decision tree graph
 feature_names = X.columns
 feature_cols = X.columns
 dot_data = export_graphviz(clf, out_file=None,
+                           feature_names=feature_cols,
+                           class_names=['0', '1'],
+                           filled=True, rounded=True,
+                           special_characters=True)
 
-                         feature_names=feature_cols,
-
-                         class_names=['0','1'],
-
-                         filled=True, rounded=True,
-
-                         special_characters=True)
-
+# Display the graph using streamlit_graphviz
 st_graphviz_chart(dot_data)
 
 
