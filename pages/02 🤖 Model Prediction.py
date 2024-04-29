@@ -45,7 +45,6 @@ tree_results = clf.predict(X_test)
 
 import graphviz
 from sklearn.tree import export_graphviz
-from streamlit_graphviz import st_graphviz_chart
 
 # Assuming `clf` and `X` are defined somewhere in your code
 
