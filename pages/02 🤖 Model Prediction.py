@@ -59,7 +59,7 @@ dot_data = export_graphviz(clf, out_file=None,
                            special_characters=True)
 
 # Display the graph using streamlit_graphviz
-st_graphviz_chart(dot_data)
+st.graphviz_chart(dot_data)
 
 
 knn = KNeighborsClassifier()
