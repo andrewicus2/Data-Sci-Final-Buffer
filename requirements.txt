@@ -7,3 +7,4 @@ tensorflow
 matplotlib
 streamlit
 seaborn
+graphviz
