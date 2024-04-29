@@ -27,8 +27,8 @@ df = df.drop(["ID"], axis = 1)
 
 params = st.multiselect("Select Parameters", df.columns, default = ["Year_Birth"])
 
-if(params == ""):
-    st.write("Please Select Params")
+if not params:
+    st.warning("Please select at least one parameter.")
 else:
 
     X = df.drop(labels = ['Response'], axis = 1)
