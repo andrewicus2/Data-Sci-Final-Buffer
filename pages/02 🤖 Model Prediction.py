@@ -39,7 +39,7 @@ logmodel = LogisticRegression()
 logmodel.fit(X_train,y_train)
 log_results = logmodel.predict(X_test)
 
-clf = DecisionTreeClassifier()
+clf = DecisionTreeClassifier(max_depth=3)
 clf = clf.fit(X_train,y_train)
 tree_results = clf.predict(X_test)
 
