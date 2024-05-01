@@ -8,5 +8,3 @@ matplotlib
 streamlit
 seaborn
 graphviz
-streamlit_graphviz
-streamlit-graphviz
