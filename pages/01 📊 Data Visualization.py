@@ -26,15 +26,17 @@ st.metric(value = df_unclean.shape[0] - df.shape[0], label = "Difference")
 
 # Education Levels
 
+st.header("Education Distribution")
 st.bar_chart(df.groupby("Education").size(), color = "#FF3008")
 
+st.header("Birth Year Distribution")
 st.bar_chart(df.groupby("Year_Birth").size(), color = "#FF3008")
 
+st.header("Birth Year Distribution")
 accepted_cmp_dataset = df[["AcceptedCmp1","AcceptedCmp2","AcceptedCmp3","AcceptedCmp4","AcceptedCmp5"]]
 counts = accepted_cmp_dataset.sum()
 counts = counts.reset_index()
 counts.columns = ['Campaign', 'Frequency']
-
 st.bar_chart(counts.set_index('Campaign'), color = "#FF3008")
 
 df['Education'] = df['Education'].astype('category').cat.codes
@@ -42,6 +44,8 @@ df['Marital_Status'] = df['Marital_Status'].astype('category').cat.codes
 
 df = df.drop(["Dt_Customer"], axis = 1)
 df = df.drop(["ID"], axis = 1)
+
+st.header("Heatmap")
 
 heatmap = plt.figure(figsize=(18, 10))
 sns.heatmap(df.corr().round(2), annot=True, cmap="Reds")
