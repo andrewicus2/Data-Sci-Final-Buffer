@@ -38,40 +38,40 @@ else:
 
     tracker = EmissionsTracker()
     tracker.start()
+    if(model == "Logistic Regression"):
+        logmodel = LogisticRegression()
+        logmodel.fit(X_train,y_train)
+        model_accuracy = logmodel.predict(X_test)
+    elif(model == "K-Nearest Neighbors"):
 
-    logmodel = LogisticRegression()
-    logmodel.fit(X_train,y_train)
-    log_results = logmodel.predict(X_test)
+        knn = KNeighborsClassifier()
+        knn.fit(X_train, y_train)
+        model_accuracy = knn.predict(X_test)
+    else:
+        clf = DecisionTreeClassifier(max_depth=3)
+        clf = clf.fit(X_train,y_train)
+        model_accuracy = clf.predict(X_test)
 
-    clf = DecisionTreeClassifier(max_depth=3)
-    clf = clf.fit(X_train,y_train)
-    tree_results = clf.predict(X_test)
+        import graphviz
+        from sklearn.tree import export_graphviz
 
-    import graphviz
-    from sklearn.tree import export_graphviz
+        # Assuming `clf` and `X` are defined somewhere in your code
 
-    # Assuming `clf` and `X` are defined somewhere in your code
+        # Your code for exporting the decision tree graph
+        feature_names = X.columns
+        feature_cols = X.columns
+        dot_data = export_graphviz(clf, out_file=None,
+                                feature_names=feature_cols,
+                                class_names=['0', '1'],
+                                filled=True, rounded=True,
+                                special_characters=True)
 
-    # Your code for exporting the decision tree graph
-    feature_names = X.columns
-    feature_cols = X.columns
-    dot_data = export_graphviz(clf, out_file=None,
-                            feature_names=feature_cols,
-                            class_names=['0', '1'],
-                            filled=True, rounded=True,
-                            special_characters=True)
-
-    # Display the graph using streamlit_graphviz
-    st.graphviz_chart(dot_data)
+        # Display the graph using streamlit_graphviz
+        st.graphviz_chart(dot_data)
 
 
-    knn = KNeighborsClassifier()
-    knn.fit(X_train, y_train)
-    knn_results = knn.predict(X_test)
 
     emissions = tracker.stop()
     print(f"Estimated emissions for training the model: {emissions:.4f} kg of CO2")
 
-    st.metric(label = "Log Accuracy", value = str(round(metrics.accuracy_score(y_test, log_results)*100, 2)) + "%")
-    st.metric(label = "Tree Accuracy", value = str(round(metrics.accuracy_score(y_test, tree_results)*100, 2)) + "%")
-    st.metric(label = "kNN Accuracy", value = str(round(metrics.accuracy_score(y_test, knn_results)*100, 2)) + "%")
+    st.metric(label = "Accuracy", value = str(round(metrics.accuracy_score(y_test, model_accuracy)*100, 2)) + "%")
