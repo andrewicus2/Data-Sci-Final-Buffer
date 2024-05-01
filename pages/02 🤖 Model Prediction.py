@@ -10,7 +10,7 @@ from sklearn import metrics #Import scikit-learn metrics module for accuracy cal
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
-# from codecarbon import EmissionsTracker
+from codecarbon import EmissionsTracker
 
 url = "https://upload.wikimedia.org/wikipedia/commons/6/6a/DoorDash_Logo.svg"
 st.image(url,  output_format="PNG", width=300)
@@ -24,8 +24,8 @@ df['Education'] = df['Education'].astype('category').cat.codes
 df['Marital_Status'] = df['Marital_Status'].astype('category').cat.codes
 df = df.drop(["Dt_Customer"], axis = 1)
 df = df.drop(["ID"], axis = 1)
-model = st.selectbox("Select Model", ["Logistic Regression", "K-Nearest Neighbors", "Decision Tree"])
 params = st.multiselect("Select Parameters", df.columns, default = ["Year_Birth"])
+model = st.selectbox("Select Model", ["Logistic Regression", "K-Nearest Neighbors", "Decision Tree"])
 
 if not params:
     st.warning("Please select at least one parameter.")
@@ -36,8 +36,8 @@ else:
     y = df["Response"]
     X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.3, random_state = 42)
 
-    # tracker = EmissionsTracker()
-    # tracker.start()
+    tracker = EmissionsTracker()
+    tracker.start()
 
     logmodel = LogisticRegression()
     logmodel.fit(X_train,y_train)
@@ -69,8 +69,8 @@ else:
     knn.fit(X_train, y_train)
     knn_results = knn.predict(X_test)
 
-    # emissions = tracker.stop()
-    # print(f"Estimated emissions for training the model: {emissions:.4f} kg of CO2")
+    emissions = tracker.stop()
+    print(f"Estimated emissions for training the model: {emissions:.4f} kg of CO2")
 
     st.metric(label = "Log Accuracy", value = str(round(metrics.accuracy_score(y_test, log_results)*100, 2)) + "%")
     st.metric(label = "Tree Accuracy", value = str(round(metrics.accuracy_score(y_test, tree_results)*100, 2)) + "%")
