@@ -9,3 +9,4 @@ streamlit
 seaborn
 graphviz
 shapash
+shapash[report]
