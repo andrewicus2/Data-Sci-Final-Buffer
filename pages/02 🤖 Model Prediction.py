@@ -15,28 +15,6 @@ from sklearn.metrics import accuracy_score
 import time
 from shapash.explainer.smart_explainer import SmartExplainer
 
-def genAIReport():
-    xpl.generate_report(
-    output_file='output/report.html', 
-    project_info_file='utils/project_info.yml',
-    x_train=X_train,
-    y_train=y_train,
-    y_test=y_test,
-    title_story="House prices report",
-    title_description="""This document is a data science report of the kaggle house prices tutorial project. 
-        It was generated using the Shapash library.""",
-    metrics=[
-        {
-            'path': 'sklearn.metrics.mean_absolute_error',
-            'name': 'Mean absolute error', 
-        },
-        {
-            'path': 'sklearn.metrics.mean_squared_error',
-            'name': 'Mean squared error',
-        }
-    ]
-)
-
 url = "https://upload.wikimedia.org/wikipedia/commons/6/6a/DoorDash_Logo.svg"
 st.image(url,  output_format="PNG", width=300)
 
@@ -82,13 +60,13 @@ else:
         y_pred = clf.predict(X_test)
         model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
-        # Compile SmartExplainer
-        xpl = SmartExplainer(clf)
-        y_pred = pd.Series(y_pred)
-        X_test = X_test.reset_index(drop=True)
-        xpl.compile(x=X_test, y_pred=y_pred)
+        # # Compile SmartExplainer
+        # xpl = SmartExplainer(clf)
+        # y_pred = pd.Series(y_pred)
+        # X_test = X_test.reset_index(drop=True)
+        # xpl.compile(x=X_test, y_pred=y_pred)
 
-        fig = xpl.plot.features_importance()
+        # fig = xpl.plot.features_importance()
 
         import graphviz
         from sklearn.tree import export_graphviz
@@ -115,5 +93,4 @@ else:
     st.metric(label = "Accuracy", value = str(round(model_accuracy*100, 2)) + "%")
     st.metric(label = "Execution time:", value = str(round(model_execution_time, 2)) + "s")
     st.metric(label = "C02 Emissions", value = str(round(emissions, 2)) + "kg")
-    st.button(label = "Generate Report", on_click = genAIReport())
 
