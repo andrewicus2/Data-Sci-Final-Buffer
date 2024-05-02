@@ -69,6 +69,7 @@ else:
 
 
     y_pred = model.predict(X_test)
+    print(classification_report(y_test,y_pred))
     f1 = f1_score(y_test, y_pred)
     precision = precision_score(y_test, y_pred, average='binary')  # Use average='binary' for binary classification
     model_accuracy = metrics.accuracy_score(y_test, y_pred)
