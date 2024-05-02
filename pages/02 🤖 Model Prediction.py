@@ -69,20 +69,19 @@ else:
 
     col1, col2, col3 = st.columns(3)
 
-    if(model == "Decision Tree"):
-        import graphviz
-        from sklearn.tree import export_graphviz
-        # Your code for exporting the decision tree graph
-        feature_names = X.columns
-        feature_cols = X.columns
-        dot_data = export_graphviz(model, out_file=None,
-                                feature_names=feature_cols,
-                                class_names=['0', '1'],
-                                filled=True, rounded=True,
-                                special_characters=True)
+    import graphviz
+    from sklearn.tree import export_graphviz
+    # Your code for exporting the decision tree graph
+    feature_names = X.columns
+    feature_cols = X.columns
+    dot_data = export_graphviz(model, out_file=None,
+                            feature_names=feature_cols,
+                            class_names=['0', '1'],
+                            filled=True, rounded=True,
+                            special_characters=True)
 
-        # Display the graph using streamlit_graphviz
-        st.graphviz_chart(dot_data)
+    # Display the graph using streamlit_graphviz
+    st.graphviz_chart(dot_data)
     # Metric 1: Accuracy
     col1.metric(label="Accuracy", value=str(round(model_accuracy*100, 2)) + "%")
 
