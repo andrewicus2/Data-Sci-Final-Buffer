@@ -64,11 +64,7 @@ else:
         X_test = X_test.reset_index(drop=True)
         xpl.compile(x=X_test, y_pred=y_pred)
 
-        # Display results
-        st.write("Model Accuracy:", model_accuracy)
-        # You can add more components to display results as per your requirement
-
-        xpl.plot.features_importance()
+        st.pyplot(xpl.plot.features_importance())
 
         import graphviz
         from sklearn.tree import export_graphviz
