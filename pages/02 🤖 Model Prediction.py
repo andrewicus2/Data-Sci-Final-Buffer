@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from codecarbon import EmissionsTracker
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, f1_score
 import time
 from shapash.explainer.smart_explainer import SmartExplainer
 
@@ -44,9 +44,11 @@ else:
 
     if(model == "Logistic Regression"):
         model = LogisticRegression()
+        model.fit(X_train,y_train)
     elif(model == "K-Nearest Neighbors"):
         numNeighbors = st.number_input('N Neighbors', 2, 10)
         model = KNeighborsClassifier(n_neighbors = numNeighbors)
+        model.fit(X_train,y_train)
     elif(model == "Decision Tree"):
         maxDepth = st.number_input('Tree Depth', 2, 6)
         model = DecisionTreeClassifier(max_depth=maxDepth)
@@ -66,8 +68,8 @@ else:
         st.graphviz_chart(dot_data)
 
 
-    model.fit(X_train,y_train)
     y_pred = model.predict(X_test)
+    f1 = f1_score(y_test, y_pred, average='binary')
     model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
     model_end_time = time.time()
@@ -83,16 +85,19 @@ else:
 
     st.header("Key Metrics")
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
         
     # Metric 1: Accuracy
     col1.metric(label="Accuracy", value=str(round(model_accuracy*100, 2)) + "%")
 
+    col2.metric(label="F1 Score", value = round(f1, 2))
+
     # Metric 2: Execution time
-    col2.metric(label="Execution time", value=str(round(model_execution_time, 2)) + "s")
+    col3.metric(label="Execution time", value=str(round(model_execution_time, 2)) + "s")
 
     # Metric 3: CO2 Emissions
-    col3.metric(label="CO2 Emissions", value=str(round(emissions, 2)) + "kg")
+    col4.metric(label="CO2 Emissions", value=str(round(emissions, 2)) + "kg")
+
 
     st.header("Explainable AI")
     st.plotly_chart(xpl.plot.features_importance(), use_container_width = True)
