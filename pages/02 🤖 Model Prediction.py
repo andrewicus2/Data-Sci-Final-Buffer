@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from codecarbon import EmissionsTracker
+import time
 
 url = "https://upload.wikimedia.org/wikipedia/commons/6/6a/DoorDash_Logo.svg"
 st.image(url,  output_format="PNG", width=300)
