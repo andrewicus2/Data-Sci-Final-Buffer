@@ -56,7 +56,7 @@ else:
         clf = DecisionTreeClassifier(max_depth=3)
         clf = clf.fit(X_train,y_train)
         y_pred = clf.predict(X_test)
-        model_accuracy = metrics.accuracy_score(y_test, y_pred))
+        model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
         import graphviz
         from sklearn.tree import export_graphviz
