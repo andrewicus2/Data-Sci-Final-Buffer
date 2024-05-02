@@ -28,7 +28,7 @@ df['Marital_Status'] = df['Marital_Status'].astype('category').cat.codes
 df = df.drop(["Dt_Customer"], axis = 1)
 df = df.drop(["ID"], axis = 1)
 
-params = df.columns
+params = df.drop('Response', axis = 1).columns
 
 X = df.drop(labels = ['Response'], axis = 1)
 X = df[params]
