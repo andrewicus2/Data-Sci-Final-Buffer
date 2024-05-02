@@ -43,21 +43,21 @@ else:
     tracker.start()
 
     if(model == "Logistic Regression"):
-        logmodel = LogisticRegression()
-        logmodel.fit(X_train,y_train)
-        y_pred = logmodel.predict(X_test)
+        model = LogisticRegression()
+        model.fit(X_train,y_train)
+        y_pred = model.predict(X_test)
         model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
     elif(model == "K-Nearest Neighbors"):
-        knn = KNeighborsClassifier()
-        knn.fit(X_train, y_train)
-        y_pred = knn.predict(X_test)
+        model = KNeighborsClassifier()
+        model.fit(X_train, y_train)
+        y_pred = model.predict(X_test)
         model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
     else:
-        clf = DecisionTreeClassifier(max_depth=3)
-        clf = clf.fit(X_train,y_train)
-        y_pred = clf.predict(X_test)
+        model = DecisionTreeClassifier(max_depth=3)
+        model = model.fit(X_train,y_train)
+        y_pred = model.predict(X_test)
         model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
  
@@ -67,7 +67,7 @@ else:
         # Your code for exporting the decision tree graph
         feature_names = X.columns
         feature_cols = X.columns
-        dot_data = export_graphviz(clf, out_file=None,
+        dot_data = export_graphviz(model, out_file=None,
                                 feature_names=feature_cols,
                                 class_names=['0', '1'],
                                 filled=True, rounded=True,
@@ -85,7 +85,7 @@ else:
     # Display the emissions and energy consumed
 
     # Compile SmartExplainer
-    xpl = SmartExplainer(logmodel)
+    xpl = SmartExplainer(model)
     y_pred = pd.Series(y_pred)
     X_test = X_test.reset_index(drop=True)
     xpl.compile(x=X_test, y_pred=y_pred)
