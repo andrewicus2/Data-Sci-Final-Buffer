@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from codecarbon import EmissionsTracker
+from sklearn.metrics import accuracy_score
 import time
 
 url = "https://upload.wikimedia.org/wikipedia/commons/6/6a/DoorDash_Logo.svg"
@@ -43,7 +44,8 @@ else:
     if(model == "Logistic Regression"):
         logmodel = LogisticRegression()
         logmodel.fit(X_train,y_train)
-        model_accuracy = logmodel.predict(X_test)
+        y_pred = logmodel.predict(X_test)
+        model_accuracy = accuracy_score(y_test, y_pred)
 
     elif(model == "K-Nearest Neighbors"):
 
@@ -84,4 +86,4 @@ else:
 
     st.metric(label = "Accuracy", value = str(round(metrics.accuracy_score(y_test, model_accuracy)*100, 2)) + "%")
     st.metric(label = "Execution time:", value = str(round(model_execution_time, 2)) + "s")
-    st.metric(label = "C02 Emissions", value = str(round(emissions*1000, 2)) + "g")
+    st.metric(label = "C02 Emissions", value = str(round(emissions, 2)) + "kg")
