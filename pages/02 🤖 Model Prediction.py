@@ -75,14 +75,15 @@ else:
     # Metric 2: Execution time
     col2.metric(label="Execution time", value=str(round(model_execution_time, 2)) + "s")
 
-
-    st.write(emissions)
     # Metric 3: CO2 Emissions
     col3.metric(label="CO2 Emissions", value=str(round(emissions, 2)) + "kg")
 
     st.header("Explainable AI")
     st.plotly_chart(xpl.plot.features_importance(), use_container_width=True)
 
+    import random
+    subset = random.choices(X_test.index, k =50)
+    xpl.plot.features_importance(selection=subset)
 
     if(model == "Decision Tree"):
         import graphviz
