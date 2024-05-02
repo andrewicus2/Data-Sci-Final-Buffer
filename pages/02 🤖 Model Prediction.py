@@ -57,7 +57,19 @@ else:
         clf = clf.fit(X_train,y_train)
         y_pred = clf.predict(X_test)
         model_accuracy = metrics.accuracy_score(y_test, y_pred)
+
+        # Compile SmartExplainer
         xpl = SmartExplainer(clf)
+        y_pred = pd.Series(y_pred)
+        X_test = X_test.reset_index(drop=True)
+        xpl.compile(x=X_test, y_pred=y_pred)
+
+        # Display results
+        st.write("Model Accuracy:", model_accuracy)
+        # You can add more components to display results as per your requirement
+
+        xpl.plot.features_importance()
+
         import graphviz
         from sklearn.tree import export_graphviz
         # Your code for exporting the decision tree graph
@@ -71,14 +83,6 @@ else:
 
         # Display the graph using streamlit_graphviz
         st.graphviz_chart(dot_data)
-
- 
-
-        y_pred = pd.Series(y_pred)
-        X_test = X_test.reset_index(drop=True)
-        xpl.compile(x=X_test, y_pred=y_pred)
-
-        xpl.plot.features_importance()
 
     model_end_time = time.time()
     model_execution_time = model_end_time - model_start_time
