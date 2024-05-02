@@ -24,10 +24,6 @@ df = df.dropna()
 
 df.head()
 
-plt.figure(figsize=(16, 10))
-sns.heatmap(df.corr(), annot=True)
-plt.show()
-
 X = df.drop(labels = ['Response'], axis = 1)
 y = df["Response"]
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.3, random_state = 42)
