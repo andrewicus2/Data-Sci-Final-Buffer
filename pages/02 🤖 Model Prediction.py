@@ -60,13 +60,7 @@ else:
         y_pred = clf.predict(X_test)
         model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
-        # Compile SmartExplainer
-        xpl = SmartExplainer(clf)
-        y_pred = pd.Series(y_pred)
-        X_test = X_test.reset_index(drop=True)
-        xpl.compile(x=X_test, y_pred=y_pred)
-
-        st.plotly_chart(xpl.plot.features_importance())
+ 
 
         import graphviz
         from sklearn.tree import export_graphviz
@@ -89,6 +83,14 @@ else:
     emissions = tracker.stop()
 
     # Display the emissions and energy consumed
+
+    # Compile SmartExplainer
+    xpl = SmartExplainer(logmodel)
+    y_pred = pd.Series(y_pred)
+    X_test = X_test.reset_index(drop=True)
+    xpl.compile(x=X_test, y_pred=y_pred)
+
+    st.plotly_chart(xpl.plot.features_importance())
 
     st.metric(label = "Accuracy", value = str(round(model_accuracy*100, 2)) + "%")
     st.metric(label = "Execution time:", value = str(round(model_execution_time, 2)) + "s")
