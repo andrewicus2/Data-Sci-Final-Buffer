@@ -45,9 +45,11 @@ else:
     if(model == "Logistic Regression"):
         model = LogisticRegression()
     elif(model == "K-Nearest Neighbors"):
-        model = KNeighborsClassifier()
+        numNeighbors = st.number_input('N Neighbors', 2, 10)
+        model = KNeighborsClassifier(n_neighbors = numNeighbors)
     elif(model == "Decision Tree"):
-        model = DecisionTreeClassifier(max_depth=3)
+        maxDepth = st.number_input('Tree Depth', 2, 6)
+        model = DecisionTreeClassifier(max_depth=maxDepth)
         model.fit(X_train,y_train)
         import graphviz
         from sklearn.tree import export_graphviz
