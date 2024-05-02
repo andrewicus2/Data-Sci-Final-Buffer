@@ -67,12 +67,15 @@ else:
     if(model == "Logistic Regression"):
         logmodel = LogisticRegression()
         logmodel.fit(X_train,y_train)
-        model_accuracy = logmodel.predict(X_test)
+        y_pred = logmodel.predict(X_test)
+        model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
     elif(model == "K-Nearest Neighbors"):
         knn = KNeighborsClassifier()
         knn.fit(X_train, y_train)
-        model_accuracy = knn.predict(X_test)
+        y_pred = knn.predict(X_test)
+        model_accuracy = metrics.accuracy_score(y_test, y_pred)
+
     else:
         clf = DecisionTreeClassifier(max_depth=3)
         clf = clf.fit(X_train,y_train)
