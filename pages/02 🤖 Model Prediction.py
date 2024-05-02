@@ -77,7 +77,7 @@ else:
 
 
     emissions = tracker.stop()
-    st.write(emissions)
+    st.write(emissions.cpu_power)
     print(f"Estimated emissions for training the model: {emissions:.4f} kg of CO2")
 
     st.metric(label = "Accuracy", value = str(round(metrics.accuracy_score(y_test, model_accuracy)*100, 2)) + "%")
