@@ -20,6 +20,8 @@ st.image(url, output_format="PNG", width=300)
 
 st.title("Explainable AI")
 
+st.write("For this example, a decision tree model with a max depth of 6 was used.")
+
 df_unclean = pd.read_csv("ifood-data.csv")
 df = df_unclean.dropna()
 df = df[df["Year_Birth"] > 1940]
