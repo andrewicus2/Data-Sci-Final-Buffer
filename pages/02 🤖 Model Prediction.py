@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from codecarbon import EmissionsTracker
-from sklearn.metrics import accuracy_score, f1_score
+from sklearn.metrics import accuracy_score, precision_score
 import time
 from shapash.explainer.smart_explainer import SmartExplainer
 
@@ -69,7 +69,7 @@ else:
 
 
     y_pred = model.predict(X_test)
-    f1 = f1_score(y_test, y_pred)
+    f1 = precision_score(y_test, y_pred, average='binary')  # Use average='binary' for binary classification
     model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
     model_end_time = time.time()
