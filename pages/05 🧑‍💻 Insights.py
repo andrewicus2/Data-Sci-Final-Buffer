@@ -37,5 +37,4 @@ most_responsive_range = average_response.idxmax()
 # Find the average rececny within the most responsive range
 most_responsive_recency_avg = df.loc[df['Recency_bins'] == most_responsive_range, 'Recency'].mean()
 
-st.write("Most responsive recency range:", most_responsive_range)
-st.write("Average recency within the most responsive range:", most_responsive_recency_avg)
+st.metric(value = most_responsive_recency_avg, label = "Most Responsive Recency")
