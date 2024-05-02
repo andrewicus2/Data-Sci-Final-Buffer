@@ -83,12 +83,6 @@ else:
 
     emissions = tracker.stop()
 
-    # Compile SmartExplainer
-    xpl = SmartExplainer(model)
-    y_pred = pd.Series(y_pred)
-    X_test = X_test.reset_index(drop=True)
-    xpl.compile(x=X_test, y_pred=y_pred)
-
     st.header("Key Metrics")
 
     col1, col2, col3 = st.columns(3)
@@ -108,15 +102,4 @@ else:
     # Metric 3: CO2 Emissions
     col22.metric(label="CO2 Emissions", value=str(round(emissions, 2)) + "kg")
 
-
-    # st.header("Explainable AI")
-    # st.plotly_chart(xpl.plot.features_importance(), use_container_width = True)
-
-    # import random
-    # subset = random.choices(X_test.index, k =50)
-    # st.plotly_chart(xpl.plot.features_importance(selection=subset), use_container_width = True)
-
-    # st.plotly_chart(xpl.plot.contribution_plot(params[0]), use_container_width = True)
-
-    
 
