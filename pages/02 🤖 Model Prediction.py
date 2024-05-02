@@ -43,12 +43,13 @@ else:
     if(model == "Logistic Regression"):
         logmodel = LogisticRegression()
         logmodel.fit(X_train,y_train)
+        lr_pred = logmodel.predict(x_test)
         model_accuracy = logmodel.predict(X_test)
 
         from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
-        mae = mean_absolute_error(y_test, model_accuracy)
-        mse = mean_squared_error(y_test, model_accuracy)
-        r2 = r2_score(y_test, model_accuracy)
+        mae = mean_absolute_error(y_test, lr_pred)
+        mse = mean_squared_error(y_test, lr_pred)
+        r2 = r2_score(y_test, lr_pred)
 
         maeCol, mseCol, rCol = st.columns(3)
         maeCol.metric(f"Mean Absolute Error:", round(mae, 2))
