@@ -57,12 +57,9 @@ else:
         clf = clf.fit(X_train,y_train)
         y_pred = clf.predict(X_test)
         model_accuracy = metrics.accuracy_score(y_test, y_pred)
-
+        xpl = SmartExplainer(clf)
         import graphviz
         from sklearn.tree import export_graphviz
-
-        # Assuming `clf` and `X` are defined somewhere in your code
-
         # Your code for exporting the decision tree graph
         feature_names = X.columns
         feature_cols = X.columns
@@ -75,7 +72,7 @@ else:
         # Display the graph using streamlit_graphviz
         st.graphviz_chart(dot_data)
 
-        xpl = SmartExplainer(clf)
+ 
 
         y_pred = pd.Series(y_pred)
         X_test = X_test.reset_index(drop=True)
