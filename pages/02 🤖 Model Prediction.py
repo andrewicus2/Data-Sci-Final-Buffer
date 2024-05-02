@@ -77,7 +77,12 @@ else:
 
 
     emissions = tracker.stop()
+    energy_consumed = tracker.estimate()
+
+    # Display the emissions and energy consumed
     st.write("Total emissions:", emissions)
+    st.write("Total energy consumed:", energy_consumed)
+
     st.write(f"Estimated emissions for training the model: {emissions:.4f} kg of CO2")
 
     st.metric(label = "Accuracy", value = str(round(metrics.accuracy_score(y_test, model_accuracy)*100, 2)) + "%")
