@@ -10,4 +10,5 @@ st.image(url, output_format="PNG", width=300)
 
 st.title("MLflow Dashboard")
 
-st.image(url="imgs/ml-flow1.jpeg")
+img_path = 'imgs/ml-flow1.jpeg'
+st.image(img_path, caption='ML Flow Image')
