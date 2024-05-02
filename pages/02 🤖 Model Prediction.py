@@ -46,9 +46,9 @@ else:
         model_accuracy = logmodel.predict(X_test)
 
         from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
-        mae = mean_absolute_error(y_test, logmodel)
-        mse = mean_squared_error(y_test, logmodel)
-        r2 = r2_score(y_test, logmodel)
+        mae = mean_absolute_error(y_test, model_accuracy)
+        mse = mean_squared_error(y_test, model_accuracy)
+        r2 = r2_score(y_test, model_accuracy)
 
         maeCol, mseCol, rCol = st.columns(3)
         maeCol.metric(f"Mean Absolute Error:", round(mae, 2))
