@@ -58,3 +58,23 @@ most_responsive_range = average_response.idxmax()
 most_responsive_MntWines_avg = df.loc[df['MntWines'] == most_responsive_range, 'MntWines'].mean()
 
 st.metric(value = "$"+ str(round(most_responsive_MntWines_avg, 2)), label = "Amount spent on wine")
+
+df['MntGoldProds_bins'] = pd.cut(df['MntGoldProds'], bins=num_bins)
+
+average_response = df.groupby('MntGoldProds_bins')['Response'].mean()
+
+most_responsive_range = average_response.idxmax()
+
+most_responsive_MntGoldProds_avg = df.loc[df['MntGoldProds_bins'] == most_responsive_range, 'MntGoldProds'].mean()
+
+st.metric(value = "$"+ str(round(most_responsive_MntGoldProds_avg, 2)), label = "Amount spent on gold")
+
+df['NumCatalogPurchases_bins'] = pd.cut(df['NumCatalogPurchases'], bins=num_bins)
+
+average_response = df.groupby('NumCatalogPurchases')['Response'].mean()
+
+most_responsive_range = average_response.idxmax()
+
+most_responsive_NumCatalogPurchases_avg = df.loc[df['NumCatalogPurchases'] == most_responsive_range, 'NumCatalogPurchases'].mean()
+
+st.metric(value = str(round(most_responsive_NumCatalogPurchases_avg, 2)), label = "Num of catalog purchases")
