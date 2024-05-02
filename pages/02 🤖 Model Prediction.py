@@ -27,7 +27,7 @@ df['Education'] = df['Education'].astype('category').cat.codes
 df['Marital_Status'] = df['Marital_Status'].astype('category').cat.codes
 df = df.drop(["Dt_Customer"], axis = 1)
 df = df.drop(["ID"], axis = 1)
-params = st.multiselect("Select Parameters", df.columns, default = ["Year_Birth"])
+params = st.multiselect("Select Parameters", df.columns, default = ["AcceptedCmp5", "Recency", "AcceptedCmp3", "AcceptedCmp1", "NumWebVisitsMonth"])
 model = st.selectbox("Select Model", ["Logistic Regression", "K-Nearest Neighbors", "Decision Tree"])
 
 if not params:
