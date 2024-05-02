@@ -46,7 +46,7 @@ else:
         model = LogisticRegression()
     elif(model == "K-Nearest Neighbors"):
         model = KNeighborsClassifier()
-    else:
+    elif(model == "Decision Tree"):
         model = DecisionTreeClassifier(max_depth=3)
 
 
