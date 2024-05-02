@@ -82,5 +82,7 @@ import random
 subset = random.choices(X_test.index, k =50)
 st.plotly_chart(xpl.plot.features_importance(selection=subset), use_container_width = True)
 
-st.plotly_chart(xpl.plot.contribution_plot(params[0]), use_container_width = True)
+paramChoice = st.selectbox("Select Parameter", params)
+
+st.plotly_chart(xpl.plot.contribution_plot(paramChoice), use_container_width = True)
 
