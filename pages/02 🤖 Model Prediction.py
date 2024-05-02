@@ -43,7 +43,7 @@ else:
     if(model == "Logistic Regression"):
         logmodel = LogisticRegression()
         logmodel.fit(X_train,y_train)
-        lr_pred = logmodel.predict(x_test)
+        lr_pred = logmodel.predict(X_test)
         model_accuracy = logmodel.predict(X_test)
 
         from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
