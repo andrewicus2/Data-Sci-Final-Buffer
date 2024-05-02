@@ -37,4 +37,14 @@ most_responsive_range = average_response.idxmax()
 # Find the average rececny within the most responsive range
 most_responsive_recency_avg = df.loc[df['Recency_bins'] == most_responsive_range, 'Recency'].mean()
 
-st.metric(value = most_responsive_recency_avg, label = "Most Responsive Recency")
+st.metric(value = str(round(most_responsive_recency_avg, 2)) + "days", label = "Recency")
+
+df['NumWebVisitsMonth_bins'] = pd.cut(df['NumWebVisitsMonth'], bins=num_bins)
+
+average_response = df.groupby('NumWebVisitsMonth')['Response'].mean()
+
+most_responsive_range = average_response.idxmax()
+
+most_responsive_NumWebVisitsMonth_avg = df.loc[df['NumWebVisitsMonth'] == most_responsive_range, 'NumWebVisitsMonth'].mean()
+
+st.metric(value = str(round(most_responsive_NumWebVisitsMonth_avg, 2)), label = "Visits per Month")
