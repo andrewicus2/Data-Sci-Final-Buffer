@@ -83,7 +83,7 @@ else:
 
     import random
     subset = random.choices(X_test.index, k =50)
-    xpl.plot.features_importance(selection=subset)
+    st.plotly_chart(xpl.plot.features_importance(selection=subset), use_container_width = True)
 
     if(model == "Decision Tree"):
         import graphviz
