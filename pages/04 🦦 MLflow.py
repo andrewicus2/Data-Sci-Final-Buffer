@@ -11,5 +11,5 @@ st.image(url, output_format="PNG", width=300)
 st.title("MLflow Dashboard")
 
 for i in range(1, 4):
-    img_path = str('imgs/ml-flow'+i+'jpeg')
+    img_path = 'imgs/ml-flow'+str(i)+'jpeg'
     st.image(img_path, caption='ML Flow Image')
