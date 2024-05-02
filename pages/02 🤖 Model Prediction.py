@@ -42,6 +42,7 @@ else:
     model_start_time = time.time()
     tracker = EmissionsTracker()
     tracker.start()
+    clf = DecisionTreeClassifier(max_depth=3)
 
     if(model == "Logistic Regression"):
         logmodel = LogisticRegression()
@@ -53,7 +54,6 @@ else:
         knn.fit(X_train, y_train)
         model_accuracy = knn.predict(X_test)
     else:
-        clf = DecisionTreeClassifier(max_depth=3)
         clf = clf.fit(X_train,y_train)
         y_pred = clf.predict(X_test)
         model_accuracy = metrics.accuracy_score(y_test, y_pred)
