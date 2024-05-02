@@ -66,7 +66,7 @@ else:
         xpl.compile(x=X_test, y_pred=y_pred)
 
         fig = xpl.plot.features_importance()
-        
+
         import graphviz
         from sklearn.tree import export_graphviz
         # Your code for exporting the decision tree graph
@@ -92,3 +92,26 @@ else:
     st.metric(label = "Accuracy", value = str(round(model_accuracy*100, 2)) + "%")
     st.metric(label = "Execution time:", value = str(round(model_execution_time, 2)) + "s")
     st.metric(label = "C02 Emissions", value = str(round(emissions, 2)) + "kg")
+    st.button(label = "Generate Report", on_click = genAIReport())
+
+def genAIReport():
+    xpl.generate_report(
+    output_file='output/report.html', 
+    project_info_file='utils/project_info.yml',
+    x_train=X_train,
+    y_train=y_train,
+    y_test=y_test,
+    title_story="House prices report",
+    title_description="""This document is a data science report of the kaggle house prices tutorial project. 
+        It was generated using the Shapash library.""",
+    metrics=[
+        {
+            'path': 'sklearn.metrics.mean_absolute_error',
+            'name': 'Mean absolute error', 
+        },
+        {
+            'path': 'sklearn.metrics.mean_squared_error',
+            'name': 'Mean squared error',
+        }
+    ]
+)
