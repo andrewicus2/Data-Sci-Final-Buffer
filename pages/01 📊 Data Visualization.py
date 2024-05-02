@@ -32,7 +32,7 @@ st.bar_chart(df.groupby("Education").size(), color = "#FF3008")
 st.header("Birth Year Distribution")
 st.bar_chart(df.groupby("Year_Birth").size(), color = "#FF3008")
 
-st.header("Birth Year Distribution")
+st.header("Accepted Campaigns Distribution")
 accepted_cmp_dataset = df[["AcceptedCmp1","AcceptedCmp2","AcceptedCmp3","AcceptedCmp4","AcceptedCmp5"]]
 counts = accepted_cmp_dataset.sum()
 counts = counts.reset_index()
@@ -58,7 +58,6 @@ plt.xlabel('Response')
 plt.ylabel('Recency')
 plt.title('Box Plot of Response vs Recency')
 st.pyplot(recency_response)
-
 
 response_income = plt.figure()
 sns.barplot(x=df['Response'], y=df['Income'], color = "#ff3008")
