@@ -69,7 +69,7 @@ else:
 
 
     y_pred = model.predict(X_test)
-    f1 = f1_score(y_test, y_pred, average='binary')
+    f1 = f1_score(y_test, y_pred)
     model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
     model_end_time = time.time()
