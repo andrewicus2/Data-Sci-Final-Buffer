@@ -44,11 +44,9 @@ else:
     if(model == "Logistic Regression"):
         logmodel = LogisticRegression()
         logmodel.fit(X_train,y_train)
-        y_pred = logmodel.predict(X_test)
-        model_accuracy = accuracy_score(y_test, y_pred)
+        model_accuracy = logmodel.predict(X_test)
 
     elif(model == "K-Nearest Neighbors"):
-
         knn = KNeighborsClassifier()
         knn.fit(X_train, y_train)
         model_accuracy = knn.predict(X_test)
