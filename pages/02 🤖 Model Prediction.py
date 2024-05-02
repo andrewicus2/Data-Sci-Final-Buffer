@@ -48,6 +48,7 @@ else:
         model = KNeighborsClassifier()
     elif(model == "Decision Tree"):
         model = DecisionTreeClassifier(max_depth=3)
+        model.fit(X_train,y_train)
         import graphviz
         from sklearn.tree import export_graphviz
         # Your code for exporting the decision tree graph
