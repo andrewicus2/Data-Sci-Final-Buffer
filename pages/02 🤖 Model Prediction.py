@@ -14,7 +14,7 @@ from codecarbon import EmissionsTracker
 from sklearn.metrics import accuracy_score
 import time
 from shapash.explainer.smart_explainer import SmartExplainer
-from io import BytesIO
+
 
 
 url = "https://upload.wikimedia.org/wikipedia/commons/6/6a/DoorDash_Logo.svg"
@@ -66,11 +66,7 @@ else:
         xpl.compile(x=X_test, y_pred=y_pred)
 
         fig = xpl.plot.features_importance()
-        img_data = BytesIO()
-        fig.savefig(img_data, format='png')
-        img_data.seek(0)
-        st.image(img_data, caption='Feature Importance', use_column_width=True)
-
+        
         import graphviz
         from sklearn.tree import export_graphviz
         # Your code for exporting the decision tree graph
