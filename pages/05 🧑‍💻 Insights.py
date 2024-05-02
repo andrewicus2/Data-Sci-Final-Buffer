@@ -49,4 +49,12 @@ most_responsive_NumWebVisitsMonth_avg = df.loc[df['NumWebVisitsMonth'] == most_r
 
 st.metric(value = str(round(most_responsive_NumWebVisitsMonth_avg, 2)), label = "Web visits per month")
 
+df['MntWines_bins'] = pd.cut(df['MntWines'], bins=num_bins)
 
+average_response = df.groupby('MntWines')['Response'].mean()
+
+most_responsive_range = average_response.idxmax()
+
+most_responsive_MntWines_avg = df.loc[df['MntWines'] == most_responsive_range, 'MntWines'].mean()
+
+st.metric(value = "$"+ str(round(most_responsive_MntWines_avg, 2)), label = "Amount spent on wine")
