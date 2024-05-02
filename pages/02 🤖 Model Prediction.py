@@ -78,4 +78,4 @@ else:
     print(f"Estimated emissions for training the model: {emissions:.4f} kg of CO2")
 
     st.metric(label = "Accuracy", value = str(round(metrics.accuracy_score(y_test, model_accuracy)*100, 2)) + "%")
-    st.metric(label = "Execution time:", value = str(model_execution_time + "s"))
+    st.metric(label = "Execution time:", value = str(model_execution_time) + "s")
