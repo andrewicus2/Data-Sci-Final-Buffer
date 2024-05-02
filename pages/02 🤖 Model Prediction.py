@@ -77,7 +77,7 @@ else:
 
 
     emissions = tracker.stop()
-    energy_consumed = tracker.estimate()
+    energy_consumed = tracker.total()
 
     # Display the emissions and energy consumed
     st.write("Total emissions:", emissions)
