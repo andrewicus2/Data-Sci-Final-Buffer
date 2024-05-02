@@ -55,11 +55,11 @@ dot_data = export_graphviz(model, out_file=None,
 st.graphviz_chart(dot_data)
 
 y_pred = model.predict(X_test)
-st.dataframe(
-pd.DataFrame(
-    classification_report(y_test, y_pred, output_dict=True)
-).transpose()
-)
+# st.dataframe(
+# pd.DataFrame(
+#     classification_report(y_test, y_pred, output_dict=True)
+# ).transpose()
+# )
 f1 = f1_score(y_test, y_pred)
 precision = precision_score(y_test, y_pred, average='binary')  # Use average='binary' for binary classification
 model_accuracy = metrics.accuracy_score(y_test, y_pred)
