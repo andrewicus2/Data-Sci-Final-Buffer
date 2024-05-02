@@ -90,9 +90,9 @@ else:
     X_test = X_test.reset_index(drop=True)
     xpl.compile(x=X_test, y_pred=y_pred)
 
-    st.plotly_chart(xpl.plot.features_importance())
-
     st.metric(label = "Accuracy", value = str(round(model_accuracy*100, 2)) + "%")
     st.metric(label = "Execution time:", value = str(round(model_execution_time, 2)) + "s")
     st.metric(label = "C02 Emissions", value = str(round(emissions, 2)) + "kg")
+
+    st.plotly_chart(xpl.plot.features_importance(), use_container_width=True)
 
