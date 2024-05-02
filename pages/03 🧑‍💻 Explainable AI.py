@@ -38,8 +38,7 @@ model_start_time = time.time()
 tracker = EmissionsTracker()
 tracker.start()
 
-maxDepth = st.number_input('Tree Depth', 2, 6)
-model = DecisionTreeClassifier(max_depth=maxDepth)
+model = DecisionTreeClassifier(max_depth=6)
 model.fit(X_train,y_train)
 import graphviz
 from sklearn.tree import export_graphviz
