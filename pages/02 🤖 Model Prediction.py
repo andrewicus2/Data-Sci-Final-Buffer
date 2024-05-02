@@ -60,13 +60,13 @@ else:
         y_pred = clf.predict(X_test)
         model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
-        # # Compile SmartExplainer
-        # xpl = SmartExplainer(clf)
-        # y_pred = pd.Series(y_pred)
-        # X_test = X_test.reset_index(drop=True)
-        # xpl.compile(x=X_test, y_pred=y_pred)
+        # Compile SmartExplainer
+        xpl = SmartExplainer(clf)
+        y_pred = pd.Series(y_pred)
+        X_test = X_test.reset_index(drop=True)
+        xpl.compile(x=X_test, y_pred=y_pred)
 
-        # fig = xpl.plot.features_importance()
+        st.plotly_chart(xpl.plot.features_importance())
 
         import graphviz
         from sklearn.tree import export_graphviz
