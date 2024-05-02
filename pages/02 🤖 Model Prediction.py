@@ -35,7 +35,7 @@ else:
     X = df[params]
     y = df["Response"]
     X_train, X_test, y_train, y_test = train_test_split(X,y, test_size = 0.3, random_state = 42)
-
+    model_start_time = time.time()
     tracker = EmissionsTracker()
     tracker.start()
     if(model == "Logistic Regression"):
@@ -69,9 +69,12 @@ else:
         # Display the graph using streamlit_graphviz
         st.graphviz_chart(dot_data)
 
+    model_end_time = time.time()
+    model_execution_time = model_end_time - model_start_time
 
 
     emissions = tracker.stop()
     print(f"Estimated emissions for training the model: {emissions:.4f} kg of CO2")
 
     st.metric(label = "Accuracy", value = str(round(metrics.accuracy_score(y_test, model_accuracy)*100, 2)) + "%")
+    st.metric(label = "Execution time:", value = str(model_execution_time + "s"))
