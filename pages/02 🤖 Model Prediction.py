@@ -86,7 +86,7 @@ else:
 
     st.header("Key Metrics")
 
-    col1, col2, col3, col4 = st.columns(3)
+    col1, col2, col3 = st.columns(3)
         
     # Metric 1: Accuracy
     col1.metric(label="Accuracy", value=str(round(model_accuracy*100, 2)) + "%")
