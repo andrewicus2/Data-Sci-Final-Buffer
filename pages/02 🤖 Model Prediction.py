@@ -44,24 +44,45 @@ else:
 
     if(model == "Logistic Regression"):
         model = LogisticRegression()
-        model.fit(X_train,y_train)
-        y_pred = model.predict(X_test)
-        model_accuracy = metrics.accuracy_score(y_test, y_pred)
-
     elif(model == "K-Nearest Neighbors"):
         model = KNeighborsClassifier()
-        model.fit(X_train, y_train)
-        y_pred = model.predict(X_test)
-        model_accuracy = metrics.accuracy_score(y_test, y_pred)
-
     else:
         model = DecisionTreeClassifier(max_depth=3)
-        model = model.fit(X_train,y_train)
-        y_pred = model.predict(X_test)
-        model_accuracy = metrics.accuracy_score(y_test, y_pred)
 
- 
 
+    model.fit(X_train,y_train)
+    y_pred = model.predict(X_test)
+    model_accuracy = metrics.accuracy_score(y_test, y_pred)
+
+    model_end_time = time.time()
+    model_execution_time = model_end_time - model_start_time
+
+
+    emissions = tracker.stop()
+
+    # Compile SmartExplainer
+    xpl = SmartExplainer(model)
+    y_pred = pd.Series(y_pred)
+    X_test = X_test.reset_index(drop=True)
+    xpl.compile(x=X_test, y_pred=y_pred)
+
+    st.header("Key Metrics")
+
+    col1, col2, col3 = st.columns(3)
+
+    # Metric 1: Accuracy
+    col1.metric(label="Accuracy", value=str(round(model_accuracy*100, 2)) + "%")
+
+    # Metric 2: Execution time
+    col2.metric(label="Execution time", value=str(round(model_execution_time, 2)) + "s")
+
+    # Metric 3: CO2 Emissions
+    col3.metric(label="CO2 Emissions", value=str(round(emissions, 2)) + "kg")
+
+    st.header("Explainable AI")
+    st.plotly_chart(xpl.plot.features_importance(), use_container_width=True)
+    
+    if(model == "Decision Tree"):
         import graphviz
         from sklearn.tree import export_graphviz
         # Your code for exporting the decision tree graph
@@ -75,24 +96,4 @@ else:
 
         # Display the graph using streamlit_graphviz
         st.graphviz_chart(dot_data)
-
-    model_end_time = time.time()
-    model_execution_time = model_end_time - model_start_time
-
-
-    emissions = tracker.stop()
-
-    # Display the emissions and energy consumed
-
-    # Compile SmartExplainer
-    xpl = SmartExplainer(model)
-    y_pred = pd.Series(y_pred)
-    X_test = X_test.reset_index(drop=True)
-    xpl.compile(x=X_test, y_pred=y_pred)
-
-    st.metric(label = "Accuracy", value = str(round(model_accuracy*100, 2)) + "%")
-    st.metric(label = "Execution time:", value = str(round(model_execution_time, 2)) + "s")
-    st.metric(label = "C02 Emissions", value = str(round(emissions, 2)) + "kg")
-
-    st.plotly_chart(xpl.plot.features_importance(), use_container_width=True)
 
