@@ -8,10 +8,5 @@ st.image(url,  output_format="PNG", width=300)
 
 st.title("Explainable AI")
 
-xpl = SmartExplainer(clf)
-
-y_pred = pd.Series(y_pred)
-X_test = X_test.reset_index(drop=True)
-xpl.compile(x=X_test, y_pred=y_pred)
 
 
