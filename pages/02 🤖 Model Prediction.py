@@ -43,18 +43,7 @@ else:
     if(model == "Logistic Regression"):
         logmodel = LogisticRegression()
         logmodel.fit(X_train,y_train)
-        lr_pred = logmodel.predict(X_test)
         model_accuracy = logmodel.predict(X_test)
-
-        from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
-        mae = mean_absolute_error(y_test, lr_pred)
-        mse = mean_squared_error(y_test, lr_pred)
-        r2 = r2_score(y_test, lr_pred)
-
-        maeCol, mseCol, rCol = st.columns(3)
-        maeCol.metric(f"Mean Absolute Error:", round(mae, 2))
-        mseCol.metric(f"Mean Squared Error:", round(mse, 2))
-        rCol.metric(f"R2 Score: ", round(r2, 4))
 
     elif(model == "K-Nearest Neighbors"):
 
