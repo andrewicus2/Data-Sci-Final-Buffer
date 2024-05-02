@@ -84,4 +84,4 @@ else:
 
     st.metric(label = "Accuracy", value = str(round(metrics.accuracy_score(y_test, model_accuracy)*100, 2)) + "%")
     st.metric(label = "Execution time:", value = str(round(model_execution_time, 2)) + "s")
-    st.metric(label = "C02 Emissions", value = str(round(emissions, 2)) + "kg")
+    st.metric(label = "C02 Emissions", value = str(round(emissions*1000, 2)) + "g")
