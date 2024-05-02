@@ -64,7 +64,8 @@ else:
         X_test = X_test.reset_index(drop=True)
         xpl.compile(x=X_test, y_pred=y_pred)
 
-        st.pyplot(xpl.plot.features_importance())
+        fig = xpl.plot.features_importance()
+        st.pyplot(fig)
 
         import graphviz
         from sklearn.tree import export_graphviz
