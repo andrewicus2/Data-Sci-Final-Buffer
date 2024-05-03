@@ -42,9 +42,6 @@ else:
     tracker = EmissionsTracker()
     tracker.start()
 
-    st.write("Value Counts:")
-    st.write(df['Response'].value_counts())
-
     if(model == "Logistic Regression"):
         model = LogisticRegression()
         model.fit(X_train,y_train)
@@ -71,12 +68,19 @@ else:
         st.graphviz_chart(dot_data)
 
 
+    tableCol1, tableCol2 = st.columns(2)
+
+        
+
     y_pred = model.predict(X_test)
-    st.dataframe(
+    tableCol1.dataframe(
     pd.DataFrame(
         classification_report(y_test, y_pred, output_dict=True)
     ).transpose()
     )
+
+    tableCol2.write(df['Response'].value_counts())
+    
     f1 = f1_score(y_test, y_pred)
     precision = precision_score(y_test, y_pred, average='binary')  # Use average='binary' for binary classification
     model_accuracy = metrics.accuracy_score(y_test, y_pred)
