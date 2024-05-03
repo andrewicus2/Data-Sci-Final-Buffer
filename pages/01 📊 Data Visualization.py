@@ -46,7 +46,7 @@ df = df.drop(["Dt_Customer"], axis = 1)
 df = df.drop(["ID"], axis = 1)
 
 st.header("Heatmap")
-dflimed = df["AcceptedCmp1", "AcceptedCmp2", "AcceptedCmp3", "AcceptedCmp4", "AcceptedCmp5", "Recency"]
+dflimed = df["Recency"]
 heatmap = plt.figure(figsize=(18, 10))
 sns.heatmap(dflimed.corr().round(2), annot=True, cmap="Reds")
 st.pyplot(heatmap)
