@@ -84,8 +84,6 @@ row2col3.metric(value = str(round(most_responsive_NumCatalogPurchases_avg, 2)), 
 
 st.header("Insights")
 
-
-st.subheader("hi")
 st.write("""
 The most important variable is recency, symbolizing Doordash’s success in customer loyalty. It suggests that once a customer makes a purchase using the app, they will likely engage in our marketing campaigns and make repeated purchases. By targeting customers who recently made a purchase in our sixth campaign, we can continue to profit from their repeated purchasing behavior. These customers are more likely to be willing to pay for the DoorDash button, as they are likely to experience high satisfaction from the added convenience of ordering food. For the future, we will explore ways of how to expand our loyal customer base. 
 """)
@@ -101,6 +99,8 @@ The top 5 and 6 variables are linked to customer spending on food consumption; M
 st.write("""
 Information on the customer’s family, including marital status and whether they had a child or teenager at home, has a negligible effect on whether the customer responded to the marketing campaign. Unless this changes in the future, we do not need to expend resources gathering or analyzing this information. 
 """)
+
+st.header("Conclusion")
 
 st.write("""
 While this dataset gives us good insight into the correlation between whether the customer responded to past marketing campaigns and how they respond to the current one, it provides no information about the content of each marketing campaign. As a result, our analysis is entirely based on the recency of each campaign. This poses a significant limitation to our understanding of the data because the response rates to each campaign may have also been influenced by qualitative differences that we do not have access to. 
