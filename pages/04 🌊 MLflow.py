@@ -25,3 +25,4 @@ st.image('imgs/ml-flow2.jpeg', caption='Comparing Models')
 st.image('imgs/ml-flow3.jpeg', caption='Models sorted by Accuracy')
 st.image('imgs/ml-flow4.jpeg', caption='Winning Model')
 
+st.download_button(label = "Download Winning Model", filename = "meta.yaml")
