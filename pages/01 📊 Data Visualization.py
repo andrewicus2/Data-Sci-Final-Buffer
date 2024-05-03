@@ -49,7 +49,7 @@ st.header("Heatmap")
 columns_of_interest = ["AcceptedCmp1", "AcceptedCmp2", "AcceptedCmp3", "AcceptedCmp4", "AcceptedCmp5", "Recency", "Response"]
 dflimed = df[columns_of_interest]
 heatmap = plt.figure(figsize=(18, 10))
-sns.heatmap(dflimed.corr().round(2), annot=True, cmap="Reds")
+sns.heatmap(dflimed.corr(), annot=True, cmap="Reds")
 st.pyplot(heatmap)
 
 # limit to just the most correlated vars

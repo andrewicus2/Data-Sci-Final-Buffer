@@ -4,7 +4,7 @@ numpy
 pandas
 scikit-learn
 tensorflow
-matplotlib==3.7.3
+matplotlib
 streamlit
 seaborn
 graphviz
