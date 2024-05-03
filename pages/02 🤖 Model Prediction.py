@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report
 from codecarbon import EmissionsTracker
-from sklearn.metrics import accuracy_score, precision_score, f1_score, classification_report
+from sklearn.metrics import accuracy_score, precision_score, f1_score, classification_report, recall_score
 import time
 from shapash.explainer.smart_explainer import SmartExplainer
 
@@ -84,6 +84,7 @@ else:
     f1 = f1_score(y_test, y_pred)
     precision = precision_score(y_test, y_pred, average='binary')  # Use average='binary' for binary classification
     model_accuracy = metrics.accuracy_score(y_test, y_pred)
+    recall = recall_score(y_test, y_pred, average='binary')
 
     model_end_time = time.time()
     model_execution_time = model_end_time - model_start_time
@@ -102,11 +103,12 @@ else:
     col3.metric(label="Precision", value = str(round(precision*100, 2)) + "%")
 
 
-    col21, col22 = st.columns(2)
+    col21, col22, col23 = st.columns(3)
+    col21.metric(label="Recall", value = str(round(recall*100, 2)) + "%")
     # Metric 2: Execution time
-    col21.metric(label="Execution time", value=str(round(model_execution_time, 2)) + "s")
+    col22.metric(label="Execution time", value=str(round(model_execution_time, 2)) + "s")
 
     # Metric 3: CO2 Emissions
-    col22.metric(label="CO2 Emissions", value=str(round(emissions, 2)) + "kg")
+    col23.metric(label="CO2 Emissions", value=str(round(emissions, 2)) + "kg")
 
 
