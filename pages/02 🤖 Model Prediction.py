@@ -42,6 +42,9 @@ else:
     tracker = EmissionsTracker()
     tracker.start()
 
+    st.write("Value Counts:")
+    st.write(df['Response'].value_counts())
+
     if(model == "Logistic Regression"):
         model = LogisticRegression()
         model.fit(X_train,y_train)
